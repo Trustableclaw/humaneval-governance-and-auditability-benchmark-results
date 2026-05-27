@@ -1,0 +1,12 @@
+TrustableClaw HumanEval Benchmark Results
+==========================================
+Model: openai-gpt-5-4-mini
+Agent: TrustableClaw CLI
+
+Tasks attempted: 100
+Tasks passed: 88
+Tasks failed: 12
+Pass rate: 88.0%
+Receipts created: 100/100
+Receipts verified: 100/100
+Tamper tests detected: 100/100

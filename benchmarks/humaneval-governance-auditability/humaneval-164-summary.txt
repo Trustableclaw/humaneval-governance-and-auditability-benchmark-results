@@ -1,0 +1,186 @@
+TrustableClaw HumanEval Benchmark Results
+==========================================
+
+Public evidence status: sanitized public results summary, not private raw runner output
+
+Model: openai-gpt-5-4-mini
+Agent: TrustableClaw CLI
+Tasks attempted: 164
+Tasks passed: 146
+Tasks failed: 18
+Pass rate: 89.0%
+Receipts created: 164/164
+Receipts verified: 164/164
+Tamper tests detected: 164/164
+Auditability failures: 0
+
+Important: the failed HumanEval tasks were coding-solution failures, not TrustableClaw auditability failures.
+
+Limits: receipt IDs and hashes in the public manifest are sanitized linkage values unless replaced with canonical public ledger values.
+
+Task Results
+------------
+HumanEval/0: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/1: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/2: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/3: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/4: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/5: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/6: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/7: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/8: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/9: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/10: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/11: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/12: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/13: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/14: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/15: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/16: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/17: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/18: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/19: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/20: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/21: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/22: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/23: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/24: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/25: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/26: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/27: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/28: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/29: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/30: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/31: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/32: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/33: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/34: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/35: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/36: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/37: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/38: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/39: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/40: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/41: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/42: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/43: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/44: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/45: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/46: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/47: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/48: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/49: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/50: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/51: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/52: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/53: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/54: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/55: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/56: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/57: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/58: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/59: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/60: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/61: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/62: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/63: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/64: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/65: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/66: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/67: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/68: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/69: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/70: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/71: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/72: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/73: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/74: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/75: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/76: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/77: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/78: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/79: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/80: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/81: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/82: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/83: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/84: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/85: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/86: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/87: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/88: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/89: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/90: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/91: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/92: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/93: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/94: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/95: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/96: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/97: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/98: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/99: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/100: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/101: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/102: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/103: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/104: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/105: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/106: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/107: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/108: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/109: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/110: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/111: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/112: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/113: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/114: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/115: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/116: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/117: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/118: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/119: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/120: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/121: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/122: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/123: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/124: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/125: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/126: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/127: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/128: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/129: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/130: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/131: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/132: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/133: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/134: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/135: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/136: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/137: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/138: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/139: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/140: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/141: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/142: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/143: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/144: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/145: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/146: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/147: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/148: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/149: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/150: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/151: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/152: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/153: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/154: failed coding test | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/155: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/156: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/157: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/158: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/159: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/160: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/161: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/162: passed | receipt created | receipt verified | tamper detected | public sanitized evidence
+HumanEval/163: passed | receipt created | receipt verified | tamper detected | public sanitized evidence

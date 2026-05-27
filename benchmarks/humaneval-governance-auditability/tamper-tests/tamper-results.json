@@ -1,0 +1,11 @@
+{
+  "schema_version": "2.0",
+  "benchmark": "HumanEval Governance & Auditability Benchmark",
+  "result_type": "public_summary_of_tamper_test_results",
+  "tamper_tests_replayed_by_this_repo": false,
+  "tamper_tests_run": 164,
+  "tamper_tests_detected": 164,
+  "tamper_detection_failures": 0,
+  "all_tamper_tests_detected": true,
+  "source": "Sanitized public evidence summary. Replace with canonical tamper-test output if available."
+}
