@@ -4,16 +4,16 @@ TrustableClaw completed the full 164-task HumanEval benchmark with 100% reported
 
 ## Reviewer-facing result summary
 
-| Category                            |    Result |
-| ----------------------------------- | --------: |
-| HumanEval tasks attempted           | 164 / 164 |
-| HumanEval tasks passed              | 146 / 164 |
-| HumanEval tasks failed              |  18 / 164 |
-| HumanEval coding pass rate          |     89.0% |
-| TrustableClaw receipts created      | 164 / 164 |
-| TrustableClaw receipts verified     | 164 / 164 |
+| Category | Result |
+|---|---:|
+| HumanEval tasks attempted | 164 / 164 |
+| HumanEval tasks passed | 146 / 164 |
+| HumanEval tasks failed | 18 / 164 |
+| HumanEval coding pass rate | 89.0% |
+| TrustableClaw receipts created | 164 / 164 |
+| TrustableClaw receipts verified | 164 / 164 |
 | TrustableClaw tamper tests detected | 164 / 164 |
-| TrustableClaw auditability failures |         0 |
+| TrustableClaw auditability failures | 0 |
 
 ## What the results mean
 

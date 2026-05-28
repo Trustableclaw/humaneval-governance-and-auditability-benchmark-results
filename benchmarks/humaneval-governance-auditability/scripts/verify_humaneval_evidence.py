@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """Check public HumanEval governance/auditability evidence consistency.
 
-This verifier intentionally uses only sanitized public files. It does not require API
-keys and does not expose private prompts or completions.
+This verifier intentionally uses only sanitized public files. It does not require
+API keys and does not expose private prompts or completions.
 
-Important: this is an evidence consistency checker. It validates that the committed
-public summaries, CSV, JSONL, manifest, verification summary, and tamper summary all
-agree. It does not rerun paid model inference or independently replay private
-cryptographic ledger verification unless canonical public ledger artifacts are added.
+Important: this is an evidence consistency checker. It validates that the
+committed public summaries, CSV, JSONL, manifest, verification summary, and
+tamper summary all agree. It does not rerun paid model inference or
+independently replay private cryptographic ledger verification unless canonical
+public ledger artifacts are added.
 """
+
 from __future__ import annotations
 
 import csv
@@ -21,6 +23,7 @@ EXPECTED_TASKS = 164
 EXPECTED_PASSED = 146
 EXPECTED_FAILED = 18
 EXPECTED_AUDITABILITY_FAILURES = 0
+
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 TASK_RE = re.compile(r"^HumanEval/(\d+):")
 BENCH_DIR = Path(__file__).resolve().parents[1]
@@ -48,19 +51,25 @@ def validate_task_record(record: dict[str, Any], idx: int) -> None:
     task_id = record.get("task_id")
     if task_id != f"HumanEval/{idx}":
         fail(f"record {idx} has unexpected task_id: {task_id!r}")
+
     coding_result = record.get("coding_result")
     if coding_result not in {"passed", "failed"}:
         fail(f"{task_id} has invalid coding_result: {coding_result!r}")
+
     if record.get("status") != coding_result:
         fail(f"{task_id} status must match coding_result")
+
     if record.get("auditability_result") != "passed":
         fail(f"{task_id} auditability_result must be passed")
+
     require_bool(record, "receipt_created", task_id)
     require_bool(record, "receipt_verified", task_id)
     require_bool(record, "tamper_test_detected", task_id)
+
     receipt_id = record.get("receipt_id")
     if not isinstance(receipt_id, str) or not receipt_id:
         fail(f"{task_id} missing receipt_id")
+
     receipt_hash = record.get("receipt_hash")
     if not isinstance(receipt_hash, str) or not SHA256_RE.fullmatch(receipt_hash):
         fail(f"{task_id} receipt_hash must be a lowercase 64-character sha256 hex string")
@@ -90,7 +99,9 @@ def main() -> None:
         fail(f"expected {EXPECTED_TASKS} result records, found {len(records)}")
 
     by_task: dict[str, dict[str, Any]] = {}
-    passed = failed_count = 0
+    passed = 0
+    failed_count = 0
+
     for idx, record in enumerate(records):
         if not isinstance(record, dict):
             fail(f"record {idx} must be an object")
@@ -109,7 +120,7 @@ def main() -> None:
     if failed_count != EXPECTED_FAILED:
         fail(f"expected {EXPECTED_FAILED} coding failures, found {failed_count}")
 
-    jsonl_records = []
+    jsonl_records: list[dict[str, Any]] = []
     try:
         for line_no, line in enumerate(jsonl_path.read_text(encoding="utf-8").splitlines(), start=1):
             if line.strip():
@@ -122,6 +133,7 @@ def main() -> None:
                 jsonl_records.append(item)
     except FileNotFoundError:
         fail(f"missing file: {jsonl_path}")
+
     if len(jsonl_records) != EXPECTED_TASKS:
         fail(f"expected {EXPECTED_TASKS} JSONL records, found {len(jsonl_records)}")
     for idx, record in enumerate(jsonl_records):
@@ -134,6 +146,7 @@ def main() -> None:
             csv_rows = list(csv.DictReader(f))
     except FileNotFoundError:
         fail(f"missing file: {csv_path}")
+
     if len(csv_rows) != EXPECTED_TASKS:
         fail(f"expected {EXPECTED_TASKS} CSV rows, found {len(csv_rows)}")
     for idx, row in enumerate(csv_rows):
@@ -196,6 +209,7 @@ def main() -> None:
         summary_lines = summary_path.read_text(encoding="utf-8").splitlines()
     except FileNotFoundError:
         fail(f"missing file: {summary_path}")
+
     task_lines = [line for line in summary_lines if TASK_RE.match(line)]
     if len(task_lines) != EXPECTED_TASKS:
         fail(f"expected {EXPECTED_TASKS} task lines in text summary, found {len(task_lines)}")

@@ -6,21 +6,21 @@ This benchmark uses HumanEval as a fixed set of coding tasks to show whether Tru
 
 ### HumanEval coding result
 
-| Metric           |    Result |
-| ---------------- | --------: |
-| Tasks attempted  | 164 / 164 |
-| Tasks passed     | 146 / 164 |
-| Tasks failed     |  18 / 164 |
-| Coding pass rate |     89.0% |
+| Metric | Result |
+|---|---:|
+| Tasks attempted | 164 / 164 |
+| Tasks passed | 146 / 164 |
+| Tasks failed | 18 / 164 |
+| Coding pass rate | 89.0% |
 
 ### TrustableClaw auditability result
 
-| Metric                |    Result |
-| --------------------- | --------: |
-| Receipts created      | 164 / 164 |
-| Receipts verified     | 164 / 164 |
+| Metric | Result |
+|---|---:|
+| Receipts created | 164 / 164 |
+| Receipts verified | 164 / 164 |
 | Tamper tests detected | 164 / 164 |
-| Auditability failures |         0 |
+| Auditability failures | 0 |
 
 The 18 failed tasks were coding failures from the model/agent output. They were not TrustableClaw auditability failures.
 

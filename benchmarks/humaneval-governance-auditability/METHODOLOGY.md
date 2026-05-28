@@ -17,16 +17,16 @@ This benchmark measured two separate things:
 
 ## Reviewer-facing totals
 
-| Category              |    Result |
-| --------------------- | --------: |
-| Tasks attempted       |       164 |
-| Tasks passed          |       146 |
-| Tasks failed          |        18 |
-| Coding pass rate      |     89.0% |
-| Receipts created      | 164 / 164 |
-| Receipts verified     | 164 / 164 |
+| Category | Result |
+|---|---:|
+| Tasks attempted | 164 |
+| Tasks passed | 146 |
+| Tasks failed | 18 |
+| Coding pass rate | 89.0% |
+| Receipts created | 164 / 164 |
+| Receipts verified | 164 / 164 |
 | Tamper tests detected | 164 / 164 |
-| Auditability failures |         0 |
+| Auditability failures | 0 |
 
 ## How coding pass/fail was determined
 

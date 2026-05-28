@@ -4,16 +4,16 @@ This file gives reviewers the shortest path to the benchmark result and the evid
 
 ## Result at a glance
 
-| Question                                                    |    Answer |
-| ----------------------------------------------------------- | --------: |
-| How many HumanEval tasks were attempted?                    |       164 |
-| How many HumanEval tasks passed?                            |       146 |
-| How many HumanEval tasks failed?                            |        18 |
-| What was the HumanEval coding pass rate?                    |     89.0% |
-| How many TrustableClaw receipts were reported created?      | 164 / 164 |
-| How many TrustableClaw receipts were reported verified?     | 164 / 164 |
+| Question | Answer |
+|---|---:|
+| How many HumanEval tasks were attempted? | 164 |
+| How many HumanEval tasks passed? | 146 |
+| How many HumanEval tasks failed? | 18 |
+| What was the HumanEval coding pass rate? | 89.0% |
+| How many TrustableClaw receipts were reported created? | 164 / 164 |
+| How many TrustableClaw receipts were reported verified? | 164 / 164 |
 | How many TrustableClaw tamper tests were reported detected? | 164 / 164 |
-| How many TrustableClaw auditability failures were reported? |         0 |
+| How many TrustableClaw auditability failures were reported? | 0 |
 
 ## Key interpretation
 
@@ -25,16 +25,16 @@ TrustableClaw still reported audit evidence for all 164 tasks, including failed 
 
 ## Evidence map
 
-| Evidence file                            | What reviewers can check                             |
-| ---------------------------------------- | ---------------------------------------------------- |
-| `results/humaneval-164-results.json`     | All 164 task records in JSON form                    |
-| `results/humaneval-164-results.jsonl`    | All 164 task records in JSONL form                   |
-| `results/humaneval-164-summary.csv`      | Reviewer-friendly task summary table                 |
-| `humaneval-164-summary.txt`              | Human-readable task-by-task summary                  |
-| `receipts/receipt-manifest.json`         | One sanitized public receipt-manifest entry per task |
-| `verification/verification-results.json` | 164 receipts checked, 164 verified, 0 failures       |
-| `tamper-tests/tamper-results.json`       | 164 tamper tests run, 164 detected, 0 failures       |
-| `scripts/verify_humaneval_evidence.py`   | Public consistency checker for the evidence files    |
+| Evidence file | What reviewers can check |
+|---|---|
+| `results/humaneval-164-results.json` | All 164 task records in JSON form |
+| `results/humaneval-164-results.jsonl` | All 164 task records in JSONL form |
+| `results/humaneval-164-summary.csv` | Reviewer-friendly task summary table |
+| `humaneval-164-summary.txt` | Human-readable task-by-task summary |
+| `receipts/receipt-manifest.json` | One sanitized public receipt-manifest entry per task |
+| `verification/verification-results.json` | 164 receipts checked, 164 verified, 0 failures |
+| `tamper-tests/tamper-results.json` | 164 tamper tests run, 164 detected, 0 failures |
+| `scripts/verify_humaneval_evidence.py` | Public consistency checker for the evidence files |
 
 ## Reviewer verification command
 
