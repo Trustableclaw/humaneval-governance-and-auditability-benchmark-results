@@ -15,9 +15,24 @@ This benchmark measured two separate things:
 1. Coding performance: whether the model/agent output passed each HumanEval task.
 2. TrustableClaw auditability performance: whether each task produced a receipt, whether that receipt verified, and whether simulated tampering was detected.
 
+## Reviewer-facing totals
+
+| Category              |    Result |
+| --------------------- | --------: |
+| Tasks attempted       |       164 |
+| Tasks passed          |       146 |
+| Tasks failed          |        18 |
+| Coding pass rate      |     89.0% |
+| Receipts created      | 164 / 164 |
+| Receipts verified     | 164 / 164 |
+| Tamper tests detected | 164 / 164 |
+| Auditability failures |         0 |
+
 ## How coding pass/fail was determined
 
-Each HumanEval task was marked as passed or failed based on the benchmark coding test outcome reported for that task. A failed task means the model/agent output did not satisfy the HumanEval coding test for that task.
+Each HumanEval task was marked as passed or failed based on the benchmark coding test outcome reported for that task.
+
+A failed task means the model/agent output did not satisfy the HumanEval coding test for that task.
 
 ## How TrustableClaw receipts were represented
 
@@ -33,13 +48,15 @@ The GitHub verifier is a public evidence consistency checker. It does not claim 
 
 ## How tamper tests were represented
 
-The public tamper-test summary records 164 tamper tests run, 164 detections, and 0 tamper detection failures. The public verifier checks that every task agrees with this summary.
+The public tamper-test summary records 164 tamper tests run, 164 detections, and 0 tamper detection failures. The public verifier checks that every task agrees with this summary. The repo does not expose private tamper-test internals.
 
-The repo does not expose private tamper-test internals. Add canonical tamper-test logs if they are available and safe to publish.
+Add canonical tamper-test logs if they are available and safe to publish.
 
 ## Why failed coding tasks are not auditability failures
 
-A coding failure means the model generated an incorrect solution. An auditability failure would mean TrustableClaw failed to record, verify, or detect tampering for that task. The 18 failed HumanEval tasks were coding-solution failures, not TrustableClaw auditability failures.
+A coding failure means the model generated an incorrect solution. An auditability failure would mean TrustableClaw failed to record, verify, or detect tampering for that task.
+
+The 18 failed HumanEval tasks were coding-solution failures, not TrustableClaw auditability failures.
 
 TrustableClaw still created and verified receipts for those failed outputs, which is exactly what an auditability layer should do.
 

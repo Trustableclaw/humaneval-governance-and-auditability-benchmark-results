@@ -6,22 +6,29 @@ This benchmark uses HumanEval as a fixed set of coding tasks to show whether Tru
 
 ### HumanEval coding result
 
-- 164 / 164 tasks attempted
-- 146 / 164 tasks passed
-- 18 / 164 tasks failed
-- 89.0% coding pass rate
+| Metric           |    Result |
+| ---------------- | --------: |
+| Tasks attempted  | 164 / 164 |
+| Tasks passed     | 146 / 164 |
+| Tasks failed     |  18 / 164 |
+| Coding pass rate |     89.0% |
 
 ### TrustableClaw auditability result
 
-- 164 / 164 receipts created
-- 164 / 164 receipts verified
-- 164 / 164 tamper tests detected
-- 0 auditability failures
+| Metric                |    Result |
+| --------------------- | --------: |
+| Receipts created      | 164 / 164 |
+| Receipts verified     | 164 / 164 |
+| Tamper tests detected | 164 / 164 |
+| Auditability failures |         0 |
 
-The 18 failed tasks were coding failures from the model/agent output. They were not TrustableClaw auditability failures. TrustableClaw still created and verified receipts for those failed outputs, which is exactly what an auditability layer should do.
+The 18 failed tasks were coding failures from the model/agent output. They were not TrustableClaw auditability failures.
+
+TrustableClaw still created and verified receipts for those failed outputs, which is exactly what an auditability layer should do.
 
 ## Files
 
+- [`REVIEWER_SUMMARY.md`](REVIEWER_SUMMARY.md) - concise reviewer-facing summary of the eval process and results
 - [`humaneval-164-summary.txt`](humaneval-164-summary.txt) - readable task-by-task public summary
 - [`results/humaneval-164-results.json`](results/humaneval-164-results.json) - machine-readable public results summary in JSON
 - [`results/humaneval-164-results.jsonl`](results/humaneval-164-results.jsonl) - machine-readable public results summary in JSONL
@@ -37,8 +44,12 @@ The 18 failed tasks were coding failures from the model/agent output. They were 
 
 ## Reviewer guidance
 
-A reviewer should check the coding result and auditability result separately. The coding result answers whether the model-generated code passed HumanEval tests. The auditability result answers whether TrustableClaw reported audit evidence for each task.
+A reviewer should check the coding result and auditability result separately.
+
+The coding result answers whether the model-generated code passed HumanEval tests. The auditability result answers whether TrustableClaw reported audit evidence for each task.
 
 ## Evidence limits
 
-These public files are sanitized. They do not include private prompts, completions, API keys, secrets, or sensitive local paths. The included public verifier checks internal consistency across committed evidence files. It is not a substitute for canonical TrustableClaw ledger verification unless canonical public ledger artifacts are added.
+These public files are sanitized. They do not include private prompts, completions, API keys, secrets, or sensitive local paths.
+
+The included public verifier checks internal consistency across committed evidence files. It is not a substitute for canonical TrustableClaw ledger verification unless canonical public ledger artifacts are added.

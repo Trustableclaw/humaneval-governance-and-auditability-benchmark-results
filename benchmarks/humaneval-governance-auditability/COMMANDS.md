@@ -7,7 +7,9 @@ This file separates two things:
 
 ## Historical command capture status
 
-The exact historical commands for the original benchmark run were not preserved in the public evidence package. Do not invent them. If the original logs are recovered, replace the `Not recorded` entries below with the exact commands and commit the update through the official TrustableClaw GitHub account.
+The exact historical commands for the original benchmark run were not preserved in the public evidence package. Do not invent them.
+
+If the original logs are recovered, replace the `Not recorded` entries below with the exact commands and commit the update through the official TrustableClaw GitHub account.
 
 ### 1. Run HumanEval inference
 
@@ -44,6 +46,7 @@ The exact historical commands for the original benchmark run were not preserved 
 This command checks the non-secret public evidence included in this repository:
 
 ```bash
+python -m py_compile benchmarks/humaneval-governance-auditability/scripts/verify_humaneval_evidence.py
 python benchmarks/humaneval-governance-auditability/scripts/verify_humaneval_evidence.py
 ```
 
@@ -56,4 +59,6 @@ Tasks: 164; coding passed: 146; coding failed: 18; auditability failures: 0
 
 ## Important limit
 
-The public replay command verifies that the committed public evidence files agree with each other. It does not rerun paid model inference and does not independently replay private cryptographic ledger verification unless canonical public ledger artifacts are added.
+The public replay command verifies that the committed public evidence files agree with each other.
+
+It does not rerun paid model inference and does not independently replay private cryptographic ledger verification unless canonical public ledger artifacts are added.

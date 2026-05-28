@@ -2,11 +2,17 @@ name: Verify HumanEval Public Evidence Consistency
 
 on:
   push:
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   verify-humaneval-evidence:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -15,6 +21,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
+      - name: Compile verifier
+        run: python -m py_compile benchmarks/humaneval-governance-auditability/scripts/verify_humaneval_evidence.py
 
       - name: Verify public HumanEval evidence consistency
         run: python benchmarks/humaneval-governance-auditability/scripts/verify_humaneval_evidence.py

@@ -7,7 +7,15 @@ This public replay path does not require private API keys. It verifies the sanit
 From the repository root, run:
 
 ```bash
+python -m py_compile benchmarks/humaneval-governance-auditability/scripts/verify_humaneval_evidence.py
 python benchmarks/humaneval-governance-auditability/scripts/verify_humaneval_evidence.py
+```
+
+Expected output:
+
+```text
+HumanEval public evidence consistency check passed
+Tasks: 164; coding passed: 146; coding failed: 18; auditability failures: 0
 ```
 
 The verifier checks that:
@@ -28,8 +36,10 @@ The verifier checks that:
 
 ## GitHub Actions
 
-The workflow at `.github/workflows/verify-humaneval-evidence.yml` runs the same public evidence consistency check on pull requests and pushes.
+The workflow at `.github/workflows/verify-humaneval-evidence.yml` runs the same public evidence consistency check on pull requests, pushes to `main`, and manual `workflow_dispatch` runs.
 
 ## Limits
 
-This replay validates the public sanitized evidence. It does not rerun paid model inference and does not expose private prompts, completions, secrets, API keys, or local machine paths. It also does not claim to replace canonical TrustableClaw ledger verification unless canonical public ledger artifacts are added.
+This replay validates the public sanitized evidence. It does not rerun paid model inference and does not expose private prompts, completions, secrets, API keys, or local machine paths.
+
+It also does not claim to replace canonical TrustableClaw ledger verification unless canonical public ledger artifacts are added.

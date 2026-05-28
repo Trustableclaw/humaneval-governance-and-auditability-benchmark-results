@@ -2,23 +2,24 @@
 
 TrustableClaw completed the full 164-task HumanEval benchmark with 100% reported auditability coverage in the public evidence summary.
 
-## Headline Results
+## Reviewer-facing result summary
 
-### HumanEval coding result
+| Category                            |    Result |
+| ----------------------------------- | --------: |
+| HumanEval tasks attempted           | 164 / 164 |
+| HumanEval tasks passed              | 146 / 164 |
+| HumanEval tasks failed              |  18 / 164 |
+| HumanEval coding pass rate          |     89.0% |
+| TrustableClaw receipts created      | 164 / 164 |
+| TrustableClaw receipts verified     | 164 / 164 |
+| TrustableClaw tamper tests detected | 164 / 164 |
+| TrustableClaw auditability failures |         0 |
 
-- Tasks attempted: 164 / 164
-- Tasks passed: 146 / 164
-- Tasks failed: 18 / 164
-- Coding pass rate: 89.0%
+## What the results mean
 
-### TrustableClaw auditability result
+The 18 failed tasks were coding failures from the model/agent output. They were not TrustableClaw auditability failures.
 
-- Receipts created: 164 / 164
-- Receipts verified: 164 / 164
-- Tamper tests detected: 164 / 164
-- Auditability failures: 0
-
-The 18 failed tasks were coding failures from the model/agent output. They were not TrustableClaw auditability failures. TrustableClaw still created and verified receipts for those failed outputs, which is exactly what an auditability layer should do.
+TrustableClaw still reported receipt creation, receipt verification, and tamper-detection coverage for every task, including failed coding outputs. That is the purpose of an auditability layer: preserve trustworthy evidence for both successful and unsuccessful AI work.
 
 ## What this repo is meant to show
 
@@ -28,6 +29,7 @@ This repository packages public, sanitized benchmark evidence showing that Trust
 
 ## Evidence included
 
+- [Reviewer summary](benchmarks/humaneval-governance-auditability/REVIEWER_SUMMARY.md)
 - Machine-readable 164-task public results summary JSON and JSONL
 - Readable 164-task summary text
 - CSV summary for reviewers
@@ -45,6 +47,8 @@ See: [`benchmarks/humaneval-governance-auditability`](benchmarks/humaneval-gover
 
 The public files are sanitized. They do not include private prompts, private completions, API keys, secrets, or sensitive local paths.
 
-The included receipt IDs and hashes are labeled as sanitized public linkage values unless they are later replaced with canonical public TrustableClaw ledger values. The GitHub Action verifies that the public evidence files are internally consistent. It does not rerun paid model inference or independently replay private cryptographic ledger verification.
+The included receipt IDs and hashes are labeled as sanitized public linkage values unless they are later replaced with canonical public TrustableClaw ledger values.
+
+The GitHub Action verifies that the public evidence files are internally consistent. It does not rerun paid model inference or independently replay private cryptographic ledger verification.
 
 All commits that publish or update this evidence should be pushed through the official TrustableClaw GitHub account.
