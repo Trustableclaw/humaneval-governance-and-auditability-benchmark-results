@@ -2,23 +2,13 @@
 
 This file separates recorded values from values that were not preserved in the public evidence package.
 
-| Field | Value |
-| --- | --- |
-| Model | openai-gpt-5-4-mini |
-| Agent | TrustableClaw CLI |
-| Benchmark | HumanEval |
-| Number of tasks | 164 |
-| Benchmark run date | Not recorded |
-| Operating system | Not recorded |
-| Machine type | Not recorded |
-| Python version | Not recorded |
-| Go version | Not recorded |
-| Node version | Not recorded |
-| TrustableClaw version or commit | Not recorded |
-| HumanEval dataset source/version | Not recorded |
-| Temperature | Not recorded |
-| Seed | Not recorded |
-| API parameters | Not recorded |
-| Local runner version or commit | Not recorded |
+| Field                            | Value             |
+| -------------------------------- | ----------------- |
+| Model                            | gpt-4.1-mini      |
+| Agent                            | TrustableClaw CLI |
+| Benchmark                        | HumanEval         |
+| Number of tasks                  | 164               |
+| Benchmark run date               | 2026-05-25        |
+| Operating system                 | windows 11        |
 
 No unrecorded value has been guessed.

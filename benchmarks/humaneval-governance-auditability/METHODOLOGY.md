@@ -1,5 +1,13 @@
 # Methodology
 
+## Benchmark Run Details
+
+| Detail             | Value                     |
+| ------------------ | ------------------------- |
+| Benchmark run date | 2026-05-25 (single run)   |
+| Operating system   | Windows 11                |
+| Model used         | `gpt-4.1-mini`            |
+
 ## Purpose
 
 This benchmark was prepared to show how TrustableClaw records governance and auditability evidence around AI benchmark tasks.
