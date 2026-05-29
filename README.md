@@ -4,7 +4,7 @@ This repository publishes a sanitized public evidence summary for TrustableClaw'
 
 The benchmark measured two separate things:
 
-1. **HumanEval coding performance** from the model/agent setup.
+1. **HumanEval coding performance** from the gpt-5.4-mini model/agent setup.
 2. **TrustableClaw governance and auditability coverage** around each benchmark task.
 
 ## Headline Results
@@ -22,7 +22,7 @@ The benchmark measured two separate things:
 
 ## Important Interpretation
 
-The 18 failed tasks were **coding failures from the model/agent output**. They were not TrustableClaw auditability failures.
+The 18 failed tasks were **coding failures from the gpt-5.4-mini model/agent output**. They were not TrustableClaw auditability failures.
 
 TrustableClaw still created and verified auditability evidence for those failed outputs. That is the expected behavior for an auditability layer: it should record both successful and failed AI work.
 
@@ -37,7 +37,7 @@ This repository shows that TrustableClaw wrapped all 164 HumanEval benchmark tas
 
 ## What This Repository Does Not Claim
 
-This repository does **not** claim that TrustableClaw made the model better at solving coding tasks.
+This repository does **not** claim that TrustableClaw made the gpt-5.4-mini model better at solving coding tasks.
 
 This repository also does **not** claim to provide full private ledger replay from the original TrustableClaw environment. The public evidence here is sanitized and does not include private prompts, private completions, API keys, secrets, or sensitive local paths.
 

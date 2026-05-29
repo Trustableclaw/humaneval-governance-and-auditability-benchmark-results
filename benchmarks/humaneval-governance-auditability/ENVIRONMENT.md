@@ -4,7 +4,7 @@ This file separates recorded values from values that were not preserved in the p
 
 | Field                            | Value             |
 | -------------------------------- | ----------------- |
-| Model                            | gpt-4.1-mini      |
+| Model                            | gpt-5.4-mini      |
 | Agent                            | TrustableClaw CLI |
 | Benchmark                        | HumanEval         |
 | Number of tasks                  | 164               |

@@ -6,7 +6,7 @@
 | ------------------ | ------------------------- |
 | Benchmark run date | 2026-05-25 (single run)   |
 | Operating system   | Windows 11                |
-| Model used         | `gpt-4.1-mini`            |
+| Model used         | `gpt-5.4-mini`            |
 
 ## Purpose
 
