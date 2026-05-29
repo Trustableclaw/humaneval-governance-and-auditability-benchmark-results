@@ -1,25 +1,24 @@
-# Environment Details
+# Environment
 
-Use exact values when they are known. Do not guess. Missing values are intentionally marked as `Not recorded`.
+This file separates recorded values from values that were not preserved in the public evidence package.
 
-| Field | Value | Status |
-|---|---|---|
-| Benchmark run date | Not recorded | Missing historical metadata |
-| Operating system | Not recorded | Missing historical metadata |
-| Machine type | Not recorded | Missing historical metadata |
-| Python version | Not recorded | Missing historical metadata |
-| Go version | Not recorded | Missing historical metadata |
-| Node version | Not recorded | Missing historical metadata |
-| TrustableClaw version or commit hash | Not recorded | Missing historical metadata |
-| HumanEval dataset source/version | Not recorded | Missing historical metadata |
-| Model name | openai-gpt-5-4-mini | Reported in public summary |
-| Temperature | Not recorded | Missing historical metadata |
-| Seed | Not recorded | Missing historical metadata |
-| OpenAI/API parameters | Not recorded | Missing historical metadata |
-| Local runner version or commit | Not recorded | Missing historical metadata |
+| Field | Value |
+| --- | --- |
+| Model | openai-gpt-5-4-mini |
+| Agent | TrustableClaw CLI |
+| Benchmark | HumanEval |
+| Number of tasks | 164 |
+| Benchmark run date | Not recorded |
+| Operating system | Not recorded |
+| Machine type | Not recorded |
+| Python version | Not recorded |
+| Go version | Not recorded |
+| Node version | Not recorded |
+| TrustableClaw version or commit | Not recorded |
+| HumanEval dataset source/version | Not recorded |
+| Temperature | Not recorded |
+| Seed | Not recorded |
+| API parameters | Not recorded |
+| Local runner version or commit | Not recorded |
 
-## Notes
-
-The public repository should not invent missing environment details.
-
-If the original run metadata is later recovered, replace `Not recorded` values with exact values and commit the update through the official TrustableClaw GitHub account.
+No unrecorded value has been guessed.

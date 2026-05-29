@@ -1,9 +1,0 @@
-{
-  "benchmark": "HumanEval",
-  "evaluation_type": "governance_and_auditability",
-  "tasks_attempted": 164,
-  "receipts_checked": 164,
-  "receipts_verified": 164,
-  "verification_failures": 0,
-  "verification_coverage": "100%"
-}

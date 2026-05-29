@@ -1,11 +1,8 @@
 {
-  "schema_version": "2.0",
-  "benchmark": "HumanEval Governance & Auditability Benchmark",
-  "result_type": "public_summary_of_verification_results",
-  "cryptographic_verification_replayed_by_this_repo": false,
-  "receipts_checked": 164,
+  "summary_type": "public_evidence_verification_summary",
+  "tasks_checked": 164,
+  "receipts_expected": 164,
   "receipts_verified": 164,
   "verification_failures": 0,
-  "all_receipts_verified": true,
-  "source": "Sanitized public evidence summary. Replace with canonical verifier output if available."
+  "notes": "Public sanitized summary only; not private ledger replay."
 }

@@ -1,10 +1,10 @@
-# Replay and Independent Public Evidence Check
+# Replay and Public Verification
 
-This public replay path does not require private API keys. It verifies the sanitized evidence artifacts committed to the repository.
+This repository supports public evidence consistency checks. It does not provide full private ledger replay.
 
-## Local verification
+## Run the Public Consistency Verifier
 
-From the repository root, run:
+From the repository root:
 
 ```bash
 python -m py_compile benchmarks/humaneval-governance-auditability/scripts/verify_humaneval_evidence.py
@@ -18,28 +18,22 @@ HumanEval public evidence consistency check passed
 Tasks: 164; coding passed: 146; coding failed: 18; auditability failures: 0
 ```
 
+## What the Verifier Checks
+
 The verifier checks that:
 
-- The JSON and JSONL public results files are valid.
-- Exactly 164 task records exist in JSON, JSONL, CSV, and receipt manifest.
-- JSON, JSONL, CSV, and manifest task IDs match exactly.
-- Exactly 146 tasks are marked as coding passes.
-- Exactly 18 tasks are marked as coding failures.
-- Every task has `receipt_created = true`.
-- Every task has `receipt_verified = true`.
-- Every task has `tamper_test_detected = true`.
-- Every receipt ID and receipt hash matches across JSON, JSONL, CSV, and manifest.
-- Receipt hashes are valid 64-character lowercase SHA-256-style hex strings.
-- The formatted text summary contains all 164 task lines.
-- `verification/verification-results.json` totals match the task records.
-- `tamper-tests/tamper-results.json` totals match the task records.
+- 164 task records exist.
+- 146 tasks are marked as coding passed.
+- 18 tasks are marked as coding failed.
+- All 164 records report receipt creation.
+- All 164 records report receipt verification.
+- All 164 records report tamper-test detection.
+- The receipt manifest has 164 entries.
+- CSV records match JSON records.
+- JSONL records match JSON records.
+- Verification and tamper summary files match the task-level records.
+- The formatted text summary has one HumanEval task line per task.
 
-## GitHub Actions
+## What the Verifier Does Not Check
 
-The workflow at `.github/workflows/verify-humaneval-evidence.yml` runs the same public evidence consistency check on pull requests, pushes to `main`, and manual `workflow_dispatch` runs.
-
-## Limits
-
-This replay validates the public sanitized evidence. It does not rerun paid model inference and does not expose private prompts, completions, secrets, API keys, or local machine paths.
-
-It also does not claim to replace canonical TrustableClaw ledger verification unless canonical public ledger artifacts are added.
+The verifier does not rerun HumanEval inference, call any private model API, or replay a private TrustableClaw ledger.

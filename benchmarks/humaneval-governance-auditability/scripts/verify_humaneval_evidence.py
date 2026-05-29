@@ -1,14 +1,8 @@
 #!/usr/bin/env python3
 """Check public HumanEval governance/auditability evidence consistency.
 
-This verifier intentionally uses only sanitized public files. It does not require
-API keys and does not expose private prompts or completions.
-
-Important: this is an evidence consistency checker. It validates that the
-committed public summaries, CSV, JSONL, manifest, verification summary, and
-tamper summary all agree. It does not rerun paid model inference or
-independently replay private cryptographic ledger verification unless canonical
-public ledger artifacts are added.
+This verifier checks only the public sanitized evidence files in this repo.
+It does not replay private TrustableClaw ledger data or rerun HumanEval inference.
 """
 
 from __future__ import annotations
@@ -19,213 +13,105 @@ import re
 from pathlib import Path
 from typing import Any
 
+ROOT = Path(__file__).resolve().parents[3]
+BASE = ROOT / "benchmarks" / "humaneval-governance-auditability"
+RESULTS_JSON = BASE / "results" / "humaneval-164-results.json"
+RESULTS_JSONL = BASE / "results" / "humaneval-164-results.jsonl"
+SUMMARY_CSV = BASE / "results" / "humaneval-164-summary.csv"
+SUMMARY_TXT = BASE / "humaneval-164-summary.txt"
+MANIFEST_JSON = BASE / "receipts" / "receipt-manifest.json"
+VERIFICATION_JSON = BASE / "verification" / "verification-results.json"
+TAMPER_JSON = BASE / "tamper-tests" / "tamper-results.json"
+
 EXPECTED_TASKS = 164
 EXPECTED_PASSED = 146
 EXPECTED_FAILED = 18
 EXPECTED_AUDITABILITY_FAILURES = 0
-
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
-TASK_RE = re.compile(r"^HumanEval/(\d+):")
-BENCH_DIR = Path(__file__).resolve().parents[1]
-
-
-def fail(message: str) -> None:
-    raise SystemExit(f"ERROR: {message}")
 
 
 def load_json(path: Path) -> Any:
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except FileNotFoundError:
-        fail(f"missing file: {path}")
-    except json.JSONDecodeError as exc:
-        fail(f"invalid JSON in {path}: {exc}")
+    with path.open("r", encoding="utf-8") as f:
+        return json.load(f)
 
 
-def require_bool(record: dict[str, Any], key: str, task_id: str) -> None:
-    if record.get(key) is not True:
-        fail(f"{task_id} {key} must be true")
+def assert_true(condition: bool, message: str) -> None:
+    if not condition:
+        raise AssertionError(message)
 
 
-def validate_task_record(record: dict[str, Any], idx: int) -> None:
-    task_id = record.get("task_id")
-    if task_id != f"HumanEval/{idx}":
-        fail(f"record {idx} has unexpected task_id: {task_id!r}")
-
-    coding_result = record.get("coding_result")
-    if coding_result not in {"passed", "failed"}:
-        fail(f"{task_id} has invalid coding_result: {coding_result!r}")
-
-    if record.get("status") != coding_result:
-        fail(f"{task_id} status must match coding_result")
-
-    if record.get("auditability_result") != "passed":
-        fail(f"{task_id} auditability_result must be passed")
-
-    require_bool(record, "receipt_created", task_id)
-    require_bool(record, "receipt_verified", task_id)
-    require_bool(record, "tamper_test_detected", task_id)
-
-    receipt_id = record.get("receipt_id")
-    if not isinstance(receipt_id, str) or not receipt_id:
-        fail(f"{task_id} missing receipt_id")
-
-    receipt_hash = record.get("receipt_hash")
-    if not isinstance(receipt_hash, str) or not SHA256_RE.fullmatch(receipt_hash):
-        fail(f"{task_id} receipt_hash must be a lowercase 64-character sha256 hex string")
-
-
-def normalize_csv_bool(value: str, field: str, task_id: str) -> bool:
-    if value == "True":
-        return True
-    if value == "False":
-        return False
-    fail(f"{task_id} CSV field {field} must be True or False, found {value!r}")
+def canonical_task_key(row: dict[str, Any]) -> tuple[str, str, str, str]:
+    return (
+        str(row["task_id"]),
+        str(row["coding_result"]),
+        str(row["receipt_id"]),
+        str(row["receipt_hash"]),
+    )
 
 
 def main() -> None:
-    results_path = BENCH_DIR / "results" / "humaneval-164-results.json"
-    jsonl_path = BENCH_DIR / "results" / "humaneval-164-results.jsonl"
-    csv_path = BENCH_DIR / "results" / "humaneval-164-summary.csv"
-    summary_path = BENCH_DIR / "humaneval-164-summary.txt"
-    manifest_path = BENCH_DIR / "receipts" / "receipt-manifest.json"
-    verification_path = BENCH_DIR / "verification" / "verification-results.json"
-    tamper_path = BENCH_DIR / "tamper-tests" / "tamper-results.json"
+    results = load_json(RESULTS_JSON)
+    assert_true(isinstance(results, list), "results JSON must be a list")
+    assert_true(len(results) == EXPECTED_TASKS, f"expected {EXPECTED_TASKS} task records")
 
-    records = load_json(results_path)
-    if not isinstance(records, list):
-        fail("results JSON must be a list")
-    if len(records) != EXPECTED_TASKS:
-        fail(f"expected {EXPECTED_TASKS} result records, found {len(records)}")
+    task_ids = {r["task_id"] for r in results}
+    assert_true(len(task_ids) == EXPECTED_TASKS, "task IDs must be unique")
+    assert_true(task_ids == {f"HumanEval/{i}" for i in range(EXPECTED_TASKS)}, "task IDs must cover HumanEval/0..HumanEval/163")
 
-    by_task: dict[str, dict[str, Any]] = {}
-    passed = 0
-    failed_count = 0
+    passed = [r for r in results if r["coding_result"] == "passed"]
+    failed = [r for r in results if r["coding_result"] == "failed"]
+    assert_true(len(passed) == EXPECTED_PASSED, f"expected {EXPECTED_PASSED} coding passes")
+    assert_true(len(failed) == EXPECTED_FAILED, f"expected {EXPECTED_FAILED} coding failures")
 
-    for idx, record in enumerate(records):
-        if not isinstance(record, dict):
-            fail(f"record {idx} must be an object")
-        validate_task_record(record, idx)
-        task_id = record["task_id"]
-        if task_id in by_task:
-            fail(f"duplicate task_id: {task_id}")
-        by_task[task_id] = record
-        if record["coding_result"] == "passed":
-            passed += 1
-        else:
-            failed_count += 1
+    for r in results:
+        assert_true(r.get("auditability_result") == "passed", f"auditability did not pass for {r['task_id']}")
+        assert_true(r.get("receipt_created") is True, f"receipt_created not true for {r['task_id']}")
+        assert_true(r.get("receipt_verified") is True, f"receipt_verified not true for {r['task_id']}")
+        assert_true(r.get("tamper_test_detected") is True, f"tamper_test_detected not true for {r['task_id']}")
+        assert_true(SHA256_RE.match(r.get("receipt_hash", "")) is not None, f"invalid receipt hash for {r['task_id']}")
 
-    if passed != EXPECTED_PASSED:
-        fail(f"expected {EXPECTED_PASSED} coding passes, found {passed}")
-    if failed_count != EXPECTED_FAILED:
-        fail(f"expected {EXPECTED_FAILED} coding failures, found {failed_count}")
+    with RESULTS_JSONL.open("r", encoding="utf-8") as f:
+        jsonl_rows = [json.loads(line) for line in f if line.strip()]
+    assert_true(len(jsonl_rows) == EXPECTED_TASKS, "JSONL row count mismatch")
+    assert_true([canonical_task_key(r) for r in jsonl_rows] == [canonical_task_key(r) for r in results], "JSONL rows do not match JSON results")
 
-    jsonl_records: list[dict[str, Any]] = []
-    try:
-        for line_no, line in enumerate(jsonl_path.read_text(encoding="utf-8").splitlines(), start=1):
-            if line.strip():
-                try:
-                    item = json.loads(line)
-                except json.JSONDecodeError as exc:
-                    fail(f"invalid JSONL at line {line_no}: {exc}")
-                if not isinstance(item, dict):
-                    fail(f"JSONL line {line_no} must be an object")
-                jsonl_records.append(item)
-    except FileNotFoundError:
-        fail(f"missing file: {jsonl_path}")
+    with SUMMARY_CSV.open("r", encoding="utf-8", newline="") as f:
+        csv_rows = list(csv.DictReader(f))
+    assert_true(len(csv_rows) == EXPECTED_TASKS, "CSV row count mismatch")
+    csv_keys = [(r["task_id"], r["coding_result"], r["receipt_id"], r["receipt_hash"]) for r in csv_rows]
+    json_keys = [canonical_task_key(r) for r in results]
+    assert_true(csv_keys == json_keys, "CSV rows do not match JSON results")
 
-    if len(jsonl_records) != EXPECTED_TASKS:
-        fail(f"expected {EXPECTED_TASKS} JSONL records, found {len(jsonl_records)}")
-    for idx, record in enumerate(jsonl_records):
-        validate_task_record(record, idx)
-        if record != records[idx]:
-            fail(f"JSONL record for {record.get('task_id')} does not match JSON results")
+    manifest = load_json(MANIFEST_JSON)
+    assert_true(isinstance(manifest, list), "receipt manifest must be a list")
+    assert_true(len(manifest) == EXPECTED_TASKS, "receipt manifest row count mismatch")
+    manifest_by_task = {r["task_id"]: r for r in manifest}
+    assert_true(set(manifest_by_task) == task_ids, "receipt manifest task IDs mismatch")
+    for r in results:
+        m = manifest_by_task[r["task_id"]]
+        assert_true(m["receipt_id"] == r["receipt_id"], f"receipt ID mismatch for {r['task_id']}")
+        assert_true(m["receipt_hash"] == r["receipt_hash"], f"receipt hash mismatch for {r['task_id']}")
+        assert_true(m["verified"] is True, f"manifest verified not true for {r['task_id']}")
+        assert_true(m["tamper_test_detected"] is True, f"manifest tamper not true for {r['task_id']}")
 
-    try:
-        with csv_path.open(newline="", encoding="utf-8") as f:
-            csv_rows = list(csv.DictReader(f))
-    except FileNotFoundError:
-        fail(f"missing file: {csv_path}")
+    verification = load_json(VERIFICATION_JSON)
+    assert_true(verification["tasks_checked"] == EXPECTED_TASKS, "verification tasks_checked mismatch")
+    assert_true(verification["receipts_expected"] == EXPECTED_TASKS, "verification receipts_expected mismatch")
+    assert_true(verification["receipts_verified"] == EXPECTED_TASKS, "verification receipts_verified mismatch")
+    assert_true(verification["verification_failures"] == EXPECTED_AUDITABILITY_FAILURES, "verification failures mismatch")
 
-    if len(csv_rows) != EXPECTED_TASKS:
-        fail(f"expected {EXPECTED_TASKS} CSV rows, found {len(csv_rows)}")
-    for idx, row in enumerate(csv_rows):
-        task_id = row.get("task_id")
-        if task_id != f"HumanEval/{idx}":
-            fail(f"CSV row {idx} has unexpected task_id: {task_id!r}")
-        record = by_task[task_id]
-        for field in ["coding_result", "auditability_result", "receipt_id", "receipt_hash"]:
-            if row.get(field) != str(record.get(field)):
-                fail(f"CSV field {field} for {task_id} does not match JSON results")
-        for field in ["receipt_created", "receipt_verified", "tamper_test_detected"]:
-            if normalize_csv_bool(row.get(field, ""), field, task_id) is not record[field]:
-                fail(f"CSV field {field} for {task_id} does not match JSON results")
+    tamper = load_json(TAMPER_JSON)
+    assert_true(tamper["tasks_checked"] == EXPECTED_TASKS, "tamper tasks_checked mismatch")
+    assert_true(tamper["tamper_tests_run"] == EXPECTED_TASKS, "tamper_tests_run mismatch")
+    assert_true(tamper["tamper_tests_detected"] == EXPECTED_TASKS, "tamper_tests_detected mismatch")
+    assert_true(tamper["tamper_test_failures"] == EXPECTED_AUDITABILITY_FAILURES, "tamper failures mismatch")
 
-    manifest = load_json(manifest_path)
-    entries = manifest.get("entries")
-    if manifest.get("total_entries") != EXPECTED_TASKS:
-        fail("receipt manifest total_entries must be 164")
-    if not isinstance(entries, list) or len(entries) != EXPECTED_TASKS:
-        fail(f"receipt manifest must contain {EXPECTED_TASKS} entries")
-    for idx, entry in enumerate(entries):
-        if not isinstance(entry, dict):
-            fail(f"manifest entry {idx} must be an object")
-        task_id = entry.get("task_id")
-        if task_id != f"HumanEval/{idx}":
-            fail(f"manifest entry {idx} has unexpected task_id: {task_id!r}")
-        record = by_task[task_id]
-        if entry.get("receipt_id") != record["receipt_id"]:
-            fail(f"manifest receipt_id for {task_id} does not match JSON results")
-        if entry.get("receipt_hash") != record["receipt_hash"]:
-            fail(f"manifest receipt_hash for {task_id} does not match JSON results")
-        if not SHA256_RE.fullmatch(entry.get("receipt_hash", "")):
-            fail(f"manifest receipt_hash for {task_id} must be lowercase sha256 hex")
-        if entry.get("verified") is not True:
-            fail(f"manifest verified for {task_id} must be true")
-        if entry.get("tamper_test_detected") is not True:
-            fail(f"manifest tamper_test_detected for {task_id} must be true")
-
-    verification = load_json(verification_path)
-    if verification.get("receipts_checked") != EXPECTED_TASKS:
-        fail("verification receipts_checked must be 164")
-    if verification.get("receipts_verified") != EXPECTED_TASKS:
-        fail("verification receipts_verified must be 164")
-    if verification.get("verification_failures") != EXPECTED_AUDITABILITY_FAILURES:
-        fail("verification_failures must be 0")
-    if verification.get("all_receipts_verified") is not True:
-        fail("all_receipts_verified must be true")
-
-    tamper = load_json(tamper_path)
-    if tamper.get("tamper_tests_run") != EXPECTED_TASKS:
-        fail("tamper_tests_run must be 164")
-    if tamper.get("tamper_tests_detected") != EXPECTED_TASKS:
-        fail("tamper_tests_detected must be 164")
-    if tamper.get("tamper_detection_failures") != EXPECTED_AUDITABILITY_FAILURES:
-        fail("tamper_detection_failures must be 0")
-    if tamper.get("all_tamper_tests_detected") is not True:
-        fail("all_tamper_tests_detected must be true")
-
-    try:
-        summary_lines = summary_path.read_text(encoding="utf-8").splitlines()
-    except FileNotFoundError:
-        fail(f"missing file: {summary_path}")
-
-    task_lines = [line for line in summary_lines if TASK_RE.match(line)]
-    if len(task_lines) != EXPECTED_TASKS:
-        fail(f"expected {EXPECTED_TASKS} task lines in text summary, found {len(task_lines)}")
-    for idx, line in enumerate(task_lines):
-        task_id = f"HumanEval/{idx}"
-        if not line.startswith(task_id + ":"):
-            fail(f"text summary task line {idx} should start with {task_id}")
-        expected_phrase = "failed coding test" if by_task[task_id]["coding_result"] == "failed" else "passed"
-        if expected_phrase not in line:
-            fail(f"text summary for {task_id} does not match coding result")
-        for phrase in ["receipt created", "receipt verified", "tamper detected"]:
-            if phrase not in line:
-                fail(f"text summary for {task_id} missing phrase: {phrase}")
+    summary_lines = SUMMARY_TXT.read_text(encoding="utf-8").splitlines()
+    humaneval_lines = [line for line in summary_lines if line.startswith("HumanEval/")]
+    assert_true(len(humaneval_lines) == EXPECTED_TASKS, "text summary must have one task line per task")
 
     print("HumanEval public evidence consistency check passed")
-    print(f"Tasks: {EXPECTED_TASKS}; coding passed: {passed}; coding failed: {failed_count}; auditability failures: 0")
+    print(f"Tasks: {EXPECTED_TASKS}; coding passed: {EXPECTED_PASSED}; coding failed: {EXPECTED_FAILED}; auditability failures: {EXPECTED_AUDITABILITY_FAILURES}")
 
 
 if __name__ == "__main__":

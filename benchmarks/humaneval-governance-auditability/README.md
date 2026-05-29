@@ -1,55 +1,47 @@
-# HumanEval Governance & Auditability Benchmark
+# HumanEval Governance and Auditability Benchmark
 
-This benchmark uses HumanEval as a fixed set of coding tasks to show whether TrustableClaw audit evidence was produced across a full AI task run.
+This folder contains the public sanitized evidence summary for the TrustableClaw HumanEval governance and auditability benchmark.
 
-## Results
+## Result Summary
 
-### HumanEval coding result
-
-| Metric | Result |
-|---|---:|
+| Measurement | Result |
+| --- | ---: |
 | Tasks attempted | 164 / 164 |
-| Tasks passed | 146 / 164 |
-| Tasks failed | 18 / 164 |
+| Coding passes | 146 / 164 |
+| Coding failures | 18 / 164 |
 | Coding pass rate | 89.0% |
-
-### TrustableClaw auditability result
-
-| Metric | Result |
-|---|---:|
 | Receipts created | 164 / 164 |
 | Receipts verified | 164 / 164 |
 | Tamper tests detected | 164 / 164 |
 | Auditability failures | 0 |
 
-The 18 failed tasks were coding failures from the model/agent output. They were not TrustableClaw auditability failures.
+## What Was Measured
 
-TrustableClaw still created and verified receipts for those failed outputs, which is exactly what an auditability layer should do.
+The benchmark separates two different measurements:
+
+1. **Coding result**: whether the model/agent-generated answer passed the HumanEval unit tests.
+2. **Auditability result**: whether TrustableClaw created, verified, and tamper-tested public evidence records for the task.
+
+The 18 failed HumanEval tasks were coding failures. They were not TrustableClaw auditability failures.
 
 ## Files
 
-- [`REVIEWER_SUMMARY.md`](REVIEWER_SUMMARY.md) - concise reviewer-facing summary of the eval process and results
-- [`humaneval-164-summary.txt`](humaneval-164-summary.txt) - readable task-by-task public summary
-- [`results/humaneval-164-results.json`](results/humaneval-164-results.json) - machine-readable public results summary in JSON
-- [`results/humaneval-164-results.jsonl`](results/humaneval-164-results.jsonl) - machine-readable public results summary in JSONL
-- [`results/humaneval-164-summary.csv`](results/humaneval-164-summary.csv) - reviewer-friendly CSV summary
-- [`receipts/receipt-manifest.json`](receipts/receipt-manifest.json) - one sanitized public receipt-manifest entry per task
-- [`verification/verification-results.json`](verification/verification-results.json) - public receipt-verification summary
-- [`tamper-tests/tamper-results.json`](tamper-tests/tamper-results.json) - public tamper-detection summary
-- [`METHODOLOGY.md`](METHODOLOGY.md) - methodology and limitations
-- [`ENVIRONMENT.md`](ENVIRONMENT.md) - run environment details and missing-metadata status
-- [`COMMANDS.md`](COMMANDS.md) - historical command capture status and public replay commands
-- [`REPLAY.md`](REPLAY.md) - independent public evidence consistency-check instructions
-- [`scripts/verify_humaneval_evidence.py`](scripts/verify_humaneval_evidence.py) - non-secret public evidence consistency verifier
+- `REVIEWER_SUMMARY.md` — short reviewer-facing summary.
+- `METHODOLOGY.md` — plain-English method and interpretation.
+- `ENVIRONMENT.md` — recorded and not-recorded environment details.
+- `COMMANDS.md` — commands available for public consistency checks.
+- `REPLAY.md` — how to run the public verifier.
+- `results/humaneval-164-results.json` — public task-level evidence summary.
+- `results/humaneval-164-results.jsonl` — JSONL version of the same task-level summary.
+- `results/humaneval-164-summary.csv` — reviewer-friendly CSV summary.
+- `receipts/receipt-manifest.json` — sanitized receipt ID/hash manifest.
+- `verification/verification-results.json` — verification summary.
+- `tamper-tests/tamper-results.json` — tamper-test summary.
+- `scripts/verify_humaneval_evidence.py` — public evidence consistency verifier.
 
-## Reviewer guidance
+## Verify Locally
 
-A reviewer should check the coding result and auditability result separately.
-
-The coding result answers whether the model-generated code passed HumanEval tests. The auditability result answers whether TrustableClaw reported audit evidence for each task.
-
-## Evidence limits
-
-These public files are sanitized. They do not include private prompts, completions, API keys, secrets, or sensitive local paths.
-
-The included public verifier checks internal consistency across committed evidence files. It is not a substitute for canonical TrustableClaw ledger verification unless canonical public ledger artifacts are added.
+```bash
+python -m py_compile benchmarks/humaneval-governance-auditability/scripts/verify_humaneval_evidence.py
+python benchmarks/humaneval-governance-auditability/scripts/verify_humaneval_evidence.py
+```

@@ -1,54 +1,69 @@
-# HumanEval Governance & Auditability Benchmark Results
+# TrustableClaw HumanEval Governance and Auditability Benchmark Results
 
-TrustableClaw completed the full 164-task HumanEval benchmark with 100% reported auditability coverage in the public evidence summary.
+This repository publishes a sanitized public evidence summary for TrustableClaw's HumanEval governance and auditability benchmark.
 
-## Reviewer-facing result summary
+The benchmark measured two separate things:
+
+1. **HumanEval coding performance** from the model/agent setup.
+2. **TrustableClaw governance and auditability coverage** around each benchmark task.
+
+## Headline Results
 
 | Category | Result |
-|---|---:|
+| --- | ---: |
 | HumanEval tasks attempted | 164 / 164 |
-| HumanEval tasks passed | 146 / 164 |
-| HumanEval tasks failed | 18 / 164 |
-| HumanEval coding pass rate | 89.0% |
+| HumanEval coding passes | 146 / 164 |
+| HumanEval coding failures | 18 / 164 |
+| Coding pass rate | 89.0% |
 | TrustableClaw receipts created | 164 / 164 |
 | TrustableClaw receipts verified | 164 / 164 |
 | TrustableClaw tamper tests detected | 164 / 164 |
-| TrustableClaw auditability failures | 0 |
+| Reported auditability failures | 0 |
 
-## What the results mean
+## Important Interpretation
 
-The 18 failed tasks were coding failures from the model/agent output. They were not TrustableClaw auditability failures.
+The 18 failed tasks were **coding failures from the model/agent output**. They were not TrustableClaw auditability failures.
 
-TrustableClaw still reported receipt creation, receipt verification, and tamper-detection coverage for every task, including failed coding outputs. That is the purpose of an auditability layer: preserve trustworthy evidence for both successful and unsuccessful AI work.
+TrustableClaw still created and verified auditability evidence for those failed outputs. That is the expected behavior for an auditability layer: it should record both successful and failed AI work.
 
-## What this repo is meant to show
+## What This Repository Claims
 
-This repository is not claiming that TrustableClaw made the model better at HumanEval coding tasks. The coding pass rate belongs to the model/agent setup used for the run.
+This repository shows that TrustableClaw wrapped all 164 HumanEval benchmark tasks with public auditability evidence summaries:
 
-This repository packages public, sanitized benchmark evidence showing that TrustableClaw audit evidence was reported for every task in the benchmark, including both successful and failed coding outputs.
+- 164 / 164 receipts reported created.
+- 164 / 164 receipts reported verified.
+- 164 / 164 tamper tests reported detected.
+- 0 reported auditability failures.
 
-## Evidence included
+## What This Repository Does Not Claim
 
-- [Reviewer summary](benchmarks/humaneval-governance-auditability/REVIEWER_SUMMARY.md)
-- Machine-readable 164-task public results summary JSON and JSONL
-- Readable 164-task summary text
-- CSV summary for reviewers
-- Sanitized receipt manifest with one entry per task
-- Public verification-results summary
-- Public tamper-test summary
-- Methodology and limitations
-- Environment notes
-- Historical command capture status and replay command documentation
-- GitHub Actions public-evidence consistency check
+This repository does **not** claim that TrustableClaw made the model better at solving coding tasks.
 
-See: [`benchmarks/humaneval-governance-auditability`](benchmarks/humaneval-governance-auditability)
+This repository also does **not** claim to provide full private ledger replay from the original TrustableClaw environment. The public evidence here is sanitized and does not include private prompts, private completions, API keys, secrets, or sensitive local paths.
 
-## Important limits
+## Reviewer Starting Points
 
-The public files are sanitized. They do not include private prompts, private completions, API keys, secrets, or sensitive local paths.
+- [Reviewer Summary](benchmarks/humaneval-governance-auditability/REVIEWER_SUMMARY.md)
+- [Benchmark README](benchmarks/humaneval-governance-auditability/README.md)
+- [Methodology](benchmarks/humaneval-governance-auditability/METHODOLOGY.md)
+- [Replay / Verification Instructions](benchmarks/humaneval-governance-auditability/REPLAY.md)
+- [Environment Notes](benchmarks/humaneval-governance-auditability/ENVIRONMENT.md)
+- [Commands Notes](benchmarks/humaneval-governance-auditability/COMMANDS.md)
+- [Public Results JSON](benchmarks/humaneval-governance-auditability/results/humaneval-164-results.json)
+- [Receipt Manifest](benchmarks/humaneval-governance-auditability/receipts/receipt-manifest.json)
 
-The included receipt IDs and hashes are labeled as sanitized public linkage values unless they are later replaced with canonical public TrustableClaw ledger values.
+## Public Evidence Consistency Check
 
-The GitHub Action verifies that the public evidence files are internally consistent. It does not rerun paid model inference or independently replay private cryptographic ledger verification.
+Run this from the repository root:
 
-All commits that publish or update this evidence should be pushed through the official TrustableClaw GitHub account.
+```bash
+python -m py_compile benchmarks/humaneval-governance-auditability/scripts/verify_humaneval_evidence.py
+python benchmarks/humaneval-governance-auditability/scripts/verify_humaneval_evidence.py
+```
+
+Expected output:
+
+```text
+HumanEval public evidence consistency check passed
+Tasks: 164; coding passed: 146; coding failed: 18; auditability failures: 0
+```

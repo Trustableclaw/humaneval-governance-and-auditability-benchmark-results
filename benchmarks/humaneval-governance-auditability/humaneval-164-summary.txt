@@ -1,22 +1,7 @@
-TrustableClaw HumanEval Benchmark Results
-==========================================
+TrustableClaw HumanEval 164-Task Summary
 
-Model: openai-gpt-5-4-mini
-Agent: TrustableClaw CLI
+Each line shows coding result plus auditability coverage.
 
-HumanEval coding result:
-- Tasks attempted: 164
-- Tasks passed: 146
-- Tasks failed: 18
-- Pass rate: 89.0%
-
-TrustableClaw auditability result:
-- Receipts created: 164/164
-- Receipts verified: 164/164
-- Tamper tests detected: 164/164
-- Auditability failures: 0
-
-Individual Results:
 HumanEval/0: failed coding test | receipt created | receipt verified | tamper detected
 HumanEval/1: passed | receipt created | receipt verified | tamper detected
 HumanEval/2: passed | receipt created | receipt verified | tamper detected

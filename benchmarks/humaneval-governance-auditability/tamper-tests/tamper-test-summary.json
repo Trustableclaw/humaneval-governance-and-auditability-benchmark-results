@@ -1,9 +1,0 @@
-{
-  "benchmark": "HumanEval",
-  "evaluation_type": "governance_and_auditability",
-  "tasks_attempted": 164,
-  "tamper_tests_run": 164,
-  "tamper_tests_detected": 164,
-  "tamper_detection_failures": 0,
-  "tamper_detection_coverage": "100%"
-}
